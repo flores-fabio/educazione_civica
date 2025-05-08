@@ -1,42 +1,69 @@
-parole_sospette = { # il punteggio delle parole se è più basso sono più sospette
-    "shock": -3,
-    "incredibile": -2,
-    "allarmante": -3,
-    "esclusivo": -2,
-    "segreto": -2,
-    "scandalo": -3,
-    "censurato": -2,
-    "nessuno lo dice": -3,
-    "virus": -2,
-    "complotto": -4
+parole_sospette = {
+    "shock": 5,
+    "incredibile": 4,
+    "nessuno lo dice": 5,
+    "censurato": 4,
+    "clamoroso": 5,
+    "scandalo": 4,
+    "teoria del complotto": 5,
+    "segreto": 4,
+    "non vogliono che tu sappia": 5,
+    "allarme": 3,
+    "bomba": 4,
+    "urgente": 4,
+    "mai visto": 5,
+    "assurdo": 3,
+    "mistero": 4,
+    "non te lo dicono": 5,
+    "cospirazione": 5,
+    "manipolazione": 4,
+    "agenda nascosta": 5,
+    "governo ombra": 5,
+    "verità nascosta": 5,
+    "bugia dei media": 5,
+    "clickbait": 4,
+    "bufala": 5,
+    "fake": 5
 }
 
-parole_affidabili = { #Parole con punteggio più elevate sono parole più affidabili
-    "fonte": 2,
-    "ufficiale": 3,
-    "ricerca": 2,
-    "studio": 2,
-    "dati": 2,
-    "esperto": 2,
-    "verificato": 3,
-    "istituto": 2,
-    "scientifico": 3,
-    "report": 2
+parole_affidabili = {
+    "fonte": 5,
+    "verificato": 5,
+    "studio": 4,
+    "ricerca": 4,
+    "ufficiale": 5,
+    "dati": 4,
+    "autorizzato": 5,
+    "confermato": 5,
+    "documentato": 4,
+    "esperto": 3,
+    "istituto": 4,
+    "ministero": 5,
+    "organizzazione": 4,
+    "scientifico": 5,
+    "statistiche": 4,
+    "peer-reviewed": 5,
+    "analisi": 4,
+    "prove": 5,
+    "trasparente": 3,
+    "fonte attendibile": 5,
+    "intervista": 3,
+    "pubblicazione": 4,
+    "agenzia": 4,
+    "ufficio stampa": 4,
+    "documento ufficiale": 5
 }
 
 def analizza_titolo(titolo):
-    """Analizza un titolo e restituisce il punteggio totale e la classificazione"""
     parole = titolo.lower().split()
     punteggio = 0
 
-    # Analisi delle parole
     for parola in parole:
         if parola in parole_sospette:
             punteggio += parole_sospette[parola]
         elif parola in parole_affidabili:
             punteggio += parole_affidabili[parola]
 
-    # Classificazione del punteggio
     if punteggio <= -4:
         classificazione = "Probabile fake news"
     elif -3 <= punteggio <= 1:
@@ -47,7 +74,7 @@ def analizza_titolo(titolo):
     return punteggio, classificazione
 
 def analizza_lista(titoli):
-    #analizza una lista di titoli
+
     for titolo in titoli:
         punteggio, classificazione = analizza_titolo(titolo)
         print(f"\nTitolo: {titolo}\nPunteggio: {punteggio} → {classificazione}")
